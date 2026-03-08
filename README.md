@@ -1,2 +1,701 @@
-# VALTRAWEB
-Primer intento de Web para VALTRA
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALTRA | Transformamos tierra en valor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0A0A0A;
+            --section-bg: #141414;
+            --accent-color: #D4AF37;
+            --accent-hover: #b5952f;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: var(--font-title);
+            font-weight: 600;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Menu */
+        .menu-btn {
+            display: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: var(--transition);
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Container */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1541888031572-17ebfb91c13d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* About Section (Que hacemos) */
+        .about {
+            background-color: var(--section-bg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover;
+            border-radius: 2px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -30px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-color);
+            z-index: 1;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--bg-color);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .process-card {
+            background: var(--section-bg);
+            padding: 3rem 2rem;
+            text-align: left;
+            border-radius: 2px;
+            border-top: 2px solid transparent;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+            border-top: 2px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .process-number {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            color: rgba(212, 175, 55, 0.15);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .process-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .process-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Pillars Section (Por Que Valtra) */
+        .pillars {
+            background-color: var(--section-bg);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .pillar-item {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255,255,255,0.03);
+            background: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .pillar-item:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .pillar-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-family: serif;
+        }
+
+        .pillar-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .pillar-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--bg-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info > p {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-detail-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail-item strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+        }
+        
+        .contact-detail-item span {
+            color: var(--text-secondary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--section-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control::placeholder {
+            color: #666;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: #1a1a1a;
+        }
+
+        textarea.form-control {
+            height: 180px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 { font-size: 3.8rem; }
+        }
+
+        @media (max-width: 992px) {
+            .about { 
+                grid-template-columns: 1fr; 
+                gap: 3rem;
+            }
+            .about-image { height: 400px; }
+            .about-image-wrapper::after { display: none; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact { grid-template-columns: 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                overflow: hidden;
+                transition: height 0.3s ease;
+            }
+
+            .nav-links.active {
+                height: 300px;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active a {
+                margin: 1rem 0;
+            }
+
+            .menu-btn { display: block; }
+
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            
+            .process-grid { grid-template-columns: 1fr; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            
+            section { padding: 5rem 5%; }
+            .section-header { margin-bottom: 3rem; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">VALTRA</a>
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#about">¿Qué hacemos?</a>
+            <a href="#proceso">Proceso</a>
+            <a href="#pilares">Por qué VALTRA</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="fade-up">Transformamos tierra en valor</h1>
+            <p class="fade-up delay-100">Desarrollamos el máximo potencial de terrenos urbanos de gran escala en Latinoamérica, convirtiendo reservas territoriales en proyectos inmobiliarios altamente rentables.</p>
+            <a href="#about" class="btn fade-up delay-200">Conoce cómo trabajamos</a>
+        </div>
+    </header>
+
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2 class="fade-up">Asociamos talento y capital con la mejor tierra.</h2>
+            <p class="fade-up delay-100">En <strong>VALTRA</strong>, ayudamos a propietarios de terrenos urbanos (desde 1 hectárea en adelante) a maximizar el valor de su patrimonio mediante el desarrollo inmobiliario estratégico. Comprendemos que vender la tierra en breña no siempre ofrece el mayor retorno.</p>
+            <p class="fade-up delay-200">Actuamos como tu brazo desarrollador de confianza. Aportamos la inteligencia de mercado, el capital intelectual, la gestión integral y los recursos necesarios para transformar tu terreno en un proyecto de alto impacto, garantizando seguridad y la mayor rentabilidad del mercado.</p>
+        </div>
+        <div class="about-image-wrapper fade-up delay-300">
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <section id="proceso" class="process">
+        <div class="section-header">
+            <h2 class="fade-up">Nuestro Proceso</h2>
+            <p class="fade-up delay-100">Una metodología rigurosa y probada para llevar tu activo desde la concepción hasta el éxito financiero.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-card fade-up">
+                <div class="process-number">01</div>
+                <h3>Diagnóstico</h3>
+                <p>Estudios de factibilidad, normatividad urbana y análisis de vocación. Determinamos con precisión el Highest and Best Use (HBU) de tu terreno.</p>
+            </div>
+            <div class="process-card fade-up delay-100">
+                <div class="process-number">02</div>
+                <h3>Estrategia</h3>
+                <p>Conceptualización arquitectónica, estructuración legal y modelado del negocio. Creamos un plan y un vehículo de inversión óptimo y seguro para el propietario.</p>
+            </div>
+            <div class="process-card fade-up delay-200">
+                <div class="process-number">03</div>
+                <h3>Desarrollo</h3>
+                <p>Gestión de licencias, coordinación de obra e ingenierías. Ejecutamos el proyecto con los más altos estándares de calidad y eficiencia en tiempo y costo.</p>
+            </div>
+            <div class="process-card fade-up delay-300">
+                <div class="process-number">04</div>
+                <h3>Rentabilidad</h3>
+                <p>Estrategia de comercialización y administración de activos. Garantizamos la absorción del mercado y la entrega de los rendimientos proyectados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pilares" class="pillars">
+        <div class="section-header">
+            <h2 class="fade-up">¿Por qué VALTRA?</h2>
+            <p class="fade-up delay-100">Los cimientos sobre los que construimos relaciones a largo plazo con nuestros socios territoriales.</p>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-item fade-up">
+                <div class="pillar-icon">✦</div>
+                <h3>Experiencia</h3>
+                <p>Diferenciada por un equipo interdisciplinario con décadas de trayectoria en el sector inmobiliario latinoamericano, gestionando proyectos de gran escala.</p>
+            </div>
+            <div class="pillar-item fade-up delay-100">
+                <div class="pillar-icon">◆</div>
+                <h3>Confianza</h3>
+                <p>Alineación total de intereses. Trabajamos esquemas transparentes, como aportación en fideicomiso, protegiendo tu patrimonio en cada etapa del proceso.</p>
+            </div>
+            <div class="pillar-item fade-up delay-200">
+                <div class="pillar-icon">●</div>
+                <h3>Resultados</h3>
+                <p>Un historial probado de maximización de plusvalía y retorno de inversión. Convertimos tierra inactiva en una fuente sólida de riqueza generacional.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact">
+        <div class="contact-info">
+            <h2 class="fade-up">Desbloquea el valor de tu tierra</h2>
+            <p class="fade-up delay-100">Si posees un reserva territorial de 1 hectárea o más en zonas urbanas de Latinoamérica y deseas evaluar su potencial de desarrollo, ponte en contacto con nuestro equipo de expertos.</p>
+            
+            <div class="contact-details fade-up delay-200">
+                <div class="contact-detail-item">
+                    <strong>Correo Electrónico</strong>
+                    <span>contacto@valtra.com</span>
+                </div>
+                <div class="contact-detail-item">
+                    <strong>Oficina Central</strong>
+                    <span>Operaciones en toda Latinoamérica</span>
+                </div>
+            </div>
+        </div>
+        
+        <form class="contact-form fade-up delay-300" onsubmit="event.preventDefault(); alert('Mensaje enviado. Un representante de VALTRA se pondrá en contacto pronto.');">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nombre completo" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Correo electrónico corporativo" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Tamaño y ubicación del terreno (ej. 2 Hectáreas, Bogotá)" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Cuéntanos un poco sobre el estado legal y físico del terreno..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Enviar Solicitud</button>
+        </form>
+    </section>
+
+    <footer>
+        <span class="logo footer-logo">VALTRA</span>
+        <div class="social-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">X (Twitter)</a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 VALTRA Desarrollo Inmobiliario. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu when a link is clicked
+                if(navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Change navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.85)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+            }
+        });
+
+        // Intersection Observer for fade-up animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Optional: Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Trigger animations for elements already in viewport on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-up').forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
